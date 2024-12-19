@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 
 namespace SalesApi.ORM.Contexts;
 
 public class SalesDbContextFactory : IDesignTimeDbContextFactory<SalesDbContext>
 {
+    public static readonly string ConnectionString = "SalesDbConnection";
+
     public SalesDbContext CreateDbContext(string[] args)
     {
         IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -14,11 +17,14 @@ public class SalesDbContextFactory : IDesignTimeDbContextFactory<SalesDbContext>
             .Build();
 
         var builder = new DbContextOptionsBuilder<SalesDbContext>();
-        var connectionString = configuration.GetConnectionString("SalesDbConnection");
+        var connectionString = configuration.GetConnectionString(ConnectionString);
 
         builder.UseNpgsql(
             connectionString,
-            b => b.MigrationsAssembly("SalesApi.WebApi")
+            b => b.MigrationsAssembly($"{nameof(SalesApi)}.{nameof(ORM)}")
+                  .MigrationsHistoryTable(HistoryRepository.DefaultTableName, SalesDbContext.Schema)
+                  .EnableRetryOnFailure()
+
         );
 
         return new SalesDbContext(builder.Options);

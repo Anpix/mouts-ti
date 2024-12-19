@@ -6,7 +6,7 @@ namespace SalesApi.ORM.Contexts;
 
 public class SalesDbContext : DbContext
 {
-    private readonly string _schema = "sales";
+    public static readonly string Schema = "sales";
 
     public DbSet<Sale> Sales { get; set; }
     public DbSet<Product> Products { get; set; }
@@ -18,7 +18,7 @@ public class SalesDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema(_schema);
+        modelBuilder.HasDefaultSchema(Schema);
 
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
