@@ -7,12 +7,16 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["SalesApi.WebApi/SalesApi.WebApi.csproj", "SalesApi.WebApi/"]
+COPY ["SalesApi.Application/SalesApi.Application.csproj", "SalesApi.Application/"]
+COPY ["SalesApi.Common/SalesApi.Common.csproj", "SalesApi.Common/"]
+COPY ["SalesApi.Domain/SalesApi.Domain.csproj", "SalesApi.Domain/"]
+COPY ["SalesApi.IoC/SalesApi.IoC.csproj", "SalesApi.IoC/"]
+COPY ["SalesApi.ORM/SalesApi.ORM.csproj", "SalesApi.ORM/"]
 RUN dotnet restore "./SalesApi.WebApi/SalesApi.WebApi.csproj"
 COPY . .
 WORKDIR "/src/SalesApi.WebApi"
