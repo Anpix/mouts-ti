@@ -1,0 +1,50 @@
+version: '3.8'
+
+x-variables:
+    name: SalesAPI
+
+services:
+  salesapi.webapi:
+    container_name: salesapi_webapi
+    image: ${DOCKER_REGISTRY-}sales_api
+    build:
+      context: .
+      dockerfile: SalesApi.WebApi/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    ports:
+      - "8080"
+      - "8081"
+
+  salesapi.database:
+    container_name: salesapi_database
+    image: postgres:13
+
+    environment:
+      POSTGRES_DB: salesapi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432"
+    restart: unless-stopped
+
+  salesapi.nosql:
+    container_name: salesapi_nosql 
+    image: mongo:8.0    
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: mongodb
+        MONGO_INITDB_ROOT_PASSWORD: mongodb
+    ports:
+      - "27017"
+
+  salesapi.cache:
+    container_name: salesapi_cache 
+    image: redis:7.4.1-alpine     
+    command: redis-server --requirepass redis
+    environment:
+       MONGO_INITDB_ROOT_USERNAME: redis
+       MONGO_INITDB_ROOT_PASSWORD: redis
+    ports:
+       - "6379"
