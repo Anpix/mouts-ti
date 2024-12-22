@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesApi.WebApi.Common.Responses;
 
 namespace SalesApi.WebApi.Common;
 
@@ -6,8 +7,14 @@ namespace SalesApi.WebApi.Common;
 [ApiController]
 public class BaseController : ControllerBase
 {
+    protected IActionResult CustomResponse(ApiResponse response) =>
+        response.Success ? base.Ok(response) : base.BadRequest(response);
+
     protected IActionResult Ok<T>(T data) =>
         base.Ok(new ApiResponseWithData<T> { Data = data, Success = true });
+
+    protected IActionResult Created<T>(string routeName, object routeValues, ApiResponseWithData<T> response) =>
+        base.CreatedAtRoute(routeName, routeValues, response);
 
     protected IActionResult Created<T>(string routeName, object routeValues, T data) =>
         base.CreatedAtRoute(routeName, routeValues, new ApiResponseWithData<T> { Data = data, Success = true });

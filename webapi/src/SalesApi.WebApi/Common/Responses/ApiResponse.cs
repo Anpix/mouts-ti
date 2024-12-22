@@ -1,6 +1,6 @@
 ﻿using SalesApi.Common.Validation;
 
-namespace SalesApi.WebApi.Common;
+namespace SalesApi.WebApi.Common.Responses;
 
 public class ApiResponse
 {

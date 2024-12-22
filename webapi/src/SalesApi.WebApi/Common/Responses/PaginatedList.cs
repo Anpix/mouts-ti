@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace SalesApi.WebApi.Common;
+namespace SalesApi.WebApi.Common.Responses;
 
 public class PaginatedList<T> : List<T>
 {
