@@ -7,13 +7,11 @@ namespace SalesApi.WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            builder.Services.AddApiConfig(builder.Configuration);
-            builder.Services.AddDependencyInjection();
-
+            builder.Services.AddConfig(builder.Configuration);
+            
             var app = builder.Build();
 
-            app.UseApiConfig();
+            app.UseConfig();
             app.Run();
         }
     }

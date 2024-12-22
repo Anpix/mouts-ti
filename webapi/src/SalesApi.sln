@@ -25,21 +25,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BE704311
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{264A1AA6-81D1-40F6-BF88-91D66692184A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.WebApi", "src\SalesApi.WebApi\SalesApi.WebApi.csproj", "{FDB294DD-5163-482A-A9A3-69713525D40B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.WebApi", "SalesApi.WebApi\SalesApi.WebApi.csproj", "{FDB294DD-5163-482A-A9A3-69713525D40B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.ORM", "src\SalesApi.ORM\SalesApi.ORM.csproj", "{5162FFF6-E16A-4BCB-AAAF-ECB084E24BC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.ORM", "SalesApi.ORM\SalesApi.ORM.csproj", "{5162FFF6-E16A-4BCB-AAAF-ECB084E24BC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.Application", "src\SalesApi.Application\SalesApi.Application.csproj", "{49C97B2A-F353-447D-A1D1-B4313FCAD109}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.Application", "SalesApi.Application\SalesApi.Application.csproj", "{49C97B2A-F353-447D-A1D1-B4313FCAD109}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.Domain", "src\SalesApi.Domain\SalesApi.Domain.csproj", "{798BA248-40AE-40D6-9DF6-C22A30AEE89F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.Domain", "SalesApi.Domain\SalesApi.Domain.csproj", "{798BA248-40AE-40D6-9DF6-C22A30AEE89F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.Common", "src\SalesApi.Common\SalesApi.Common.csproj", "{F229DCEF-4578-425E-BE19-04518A40A80D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.Common", "SalesApi.Common\SalesApi.Common.csproj", "{F229DCEF-4578-425E-BE19-04518A40A80D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.IoC", "src\SalesApi.IoC\SalesApi.IoC.csproj", "{F553E638-C18E-4F09-BD68-F2A7FB4D45F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.IoC", "SalesApi.IoC\SalesApi.IoC.csproj", "{F553E638-C18E-4F09-BD68-F2A7FB4D45F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.Unit", "tests\SalesApi.Unit\SalesApi.Unit.csproj", "{EC52528B-1C8A-4E5B-92AC-04DE46C62B0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApi.Unit", "..\tests\SalesApi.Unit\SalesApi.Unit.csproj", "{EC52528B-1C8A-4E5B-92AC-04DE46C62B0D}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "src\docker-compose.dcproj", "{4AF79501-F785-4B98-8EE5-54BE186D67A2}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4AF79501-F785-4B98-8EE5-54BE186D67A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C361795D-30EF-4513-B313-8622BE1AD313}"
 	ProjectSection(SolutionItems) = preProject
