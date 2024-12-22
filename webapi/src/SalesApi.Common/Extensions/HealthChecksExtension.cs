@@ -6,7 +6,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using System.Net.Mime;
 
-namespace SalesApi.Common.HealthChecks;
+namespace SalesApi.Common.Extensions;
 
 
 /// <summary>
@@ -75,13 +75,13 @@ public static class HealthChecksExtension
     /// </example>
     public static void UseBasicHealthChecks(this WebApplication app)
     {
-        var livenessOptions = WriteHealtCheckRespose(app, "liveness");
+        var livenessOptions = app.WriteHealtCheckRespose("liveness");
         app.UseHealthChecks("/health/live", livenessOptions);
 
-        var readinessOptions = WriteHealtCheckRespose(app, "readiness");
+        var readinessOptions = app.WriteHealtCheckRespose("readiness");
         app.UseHealthChecks("/health/ready", readinessOptions);
 
-        var healthOptions = WriteHealtCheckRespose(app, string.Empty);
+        var healthOptions = app.WriteHealtCheckRespose(string.Empty);
         app.UseHealthChecks("/health", healthOptions);
 
         var logger = app.Services.GetRequiredService<ILogger<HealthCheckService>>();
