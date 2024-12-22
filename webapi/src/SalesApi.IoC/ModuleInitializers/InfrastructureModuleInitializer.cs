@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SalesApi.Domain.Repositories;
 using SalesApi.ORM.Contexts;
 using SalesApi.ORM.Repositories;
 
@@ -11,7 +9,9 @@ public class InfrastructureModuleInitializer : IModuleInitializer
 {
     public void Initialize(WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<DbContext>(provider => provider.GetRequiredService<SalesDbContext>());
+        builder.Services.AddDbContext<SalesDbContext>(options => 
+            SalesDbContextFactory.ConfigureDbContextOptions(options, builder.Configuration));
+
         builder.Services.AddScoped<ISaleRepository, SaleRepository>();
     }
 }

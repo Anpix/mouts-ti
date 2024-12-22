@@ -7,9 +7,9 @@ namespace SalesApi.ORM.Contexts;
 
 public class SalesDbContextFactory : IDesignTimeDbContextFactory<SalesDbContext>
 {
-    public static readonly string ConnectionString = "SalesDbConnection";
+    public SalesDbContext CreateDbContext(string[] args) => CreateDbContext();
 
-    public SalesDbContext CreateDbContext(string[] args)
+    public static SalesDbContext CreateDbContext()
     {
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -17,16 +17,20 @@ public class SalesDbContextFactory : IDesignTimeDbContextFactory<SalesDbContext>
             .Build();
 
         var builder = new DbContextOptionsBuilder<SalesDbContext>();
-        var connectionString = configuration.GetConnectionString(ConnectionString);
+        ConfigureDbContextOptions(builder, configuration);
+
+        return new SalesDbContext(builder.Options);
+    }
+
+    public static void ConfigureDbContextOptions(DbContextOptionsBuilder builder, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("SalesDbConnection");
 
         builder.UseNpgsql(
             connectionString,
             b => b.MigrationsAssembly($"{nameof(SalesApi)}.{nameof(ORM)}")
                   .MigrationsHistoryTable(HistoryRepository.DefaultTableName, SalesDbContext.Schema)
                   .EnableRetryOnFailure()
-
         );
-
-        return new SalesDbContext(builder.Options);
     }
 }

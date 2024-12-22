@@ -1,8 +1,11 @@
-﻿namespace SalesApi.WebApi.Config;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 
-public static class UseApiConfig
+namespace SalesApi.IoC.Resolvers;
+
+public static class DependencyUsageResolver
 {
-    public static WebApplication UseConfig(this WebApplication app)
+    public static WebApplication UseDependencies(this WebApplication app)
     {
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

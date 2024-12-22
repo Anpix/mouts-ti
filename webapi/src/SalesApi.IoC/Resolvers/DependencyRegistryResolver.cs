@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using SalesApi.IoC.ModuleInitializers;
 
-namespace SalesApi.IoC;
+namespace SalesApi.IoC.Resolvers;
 
-public static class DependencyResolver
+public static class DependencyRegistryResolver
 {
     public static void RegisterDependencies(this WebApplicationBuilder builder)
     {

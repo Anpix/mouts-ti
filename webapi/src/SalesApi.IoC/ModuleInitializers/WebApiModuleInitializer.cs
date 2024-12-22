@@ -7,8 +7,11 @@ public class WebApiModuleInitializer : IModuleInitializer
 {
     public void Initialize(WebApplicationBuilder builder)
     {
-
+        builder.Services.AddAuthorization();
         builder.Services.AddControllers();
         builder.Services.AddHealthChecks();
+
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
     }
 }

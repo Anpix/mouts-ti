@@ -1,4 +1,4 @@
-using SalesApi.WebApi.Config;
+using SalesApi.IoC.Resolvers;
 
 namespace SalesApi.WebApi
 {
@@ -7,11 +7,11 @@ namespace SalesApi.WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddConfig(builder.Configuration);
-            
+            builder.RegisterDependencies();
+
             var app = builder.Build();
 
-            app.UseConfig();
+            app.UseDependencies();
             app.Run();
         }
     }
