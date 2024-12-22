@@ -8,6 +8,8 @@ public class ApplicationModuleInitializer : IModuleInitializer
 {
     public void Initialize(WebApplicationBuilder builder)
     {
+        builder.Services.AddAutoMapper(typeof(ApplicationLayer).Assembly);
+
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(ApplicationLayer).Assembly));
     }
 }
