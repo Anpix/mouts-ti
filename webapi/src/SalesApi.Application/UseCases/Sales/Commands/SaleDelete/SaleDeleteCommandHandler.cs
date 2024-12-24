@@ -35,7 +35,7 @@ public class SaleDeleteCommandHandler : IRequestHandler<SaleDeleteCommand, BaseC
                 Data = request.Id
             };
 
-            return await Task.FromResult(response);
+            return response;
         }
         catch (Exception ex)
         {
@@ -49,7 +49,7 @@ public class SaleDeleteCommandHandler : IRequestHandler<SaleDeleteCommand, BaseC
                 Data = request.Id
             };
 
-            return await Task.FromResult(response);
+            return response;
         }
     }
 

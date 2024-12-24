@@ -108,9 +108,9 @@ public class SalesController : BaseController
     }
 
     [HttpPut("{id:Guid}")]
-    public async Task<IActionResult> Put([FromRoute] Guid Id, [FromBody] SaleUpdateCommand command)
+    public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] SaleUpdateCommand command)
     {
-        if (command.Id != Id)
+        if (command.Id != id)
             return BadRequest("The Id from in the request body does not match the Id from the route");
 
         try
@@ -126,7 +126,7 @@ public class SalesController : BaseController
         }
         catch (Exception e)
         {
-            var message = $"Error updating the sale id {Id}.";
+            var message = $"Error updating the sale id {id}.";
             _logger.LogError(e, message);
             return StatusCode(StatusCodes.Status500InternalServerError, message);
         }

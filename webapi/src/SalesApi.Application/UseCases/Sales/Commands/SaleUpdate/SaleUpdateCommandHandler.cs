@@ -19,7 +19,7 @@ public class SaleUpdateCommandHandler : IRequestHandler<SaleUpdateCommand, BaseC
 
     public async Task<BaseCommandResponse<Guid>> Handle(SaleUpdateCommand request, CancellationToken cancellationToken)
     {
-        var sale = new Sale
+        var sale = new Sale()
         {
             Id = request.Id,
             Number = request.Number,
