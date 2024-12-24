@@ -40,74 +40,47 @@ public class SalesController : BaseController
     [HttpGet]
     public async Task<IActionResult> GetMany(int skip = 0, int take = 10)
     {
-        try
-        {
-            var result = await _mediator.Send(new GetAllSaleQuery(skip, take));
+        var result = await _mediator.Send(new GetAllSaleQuery(skip, take));
 
-            return CustomResponse(new ApiResponseWithData<IEnumerable<SaleDto>>()
-            {
-                Success = result.Success,
-                Message = result.Message,
-                Data = result.Data
-            });
-        }
-        catch (Exception e)
+        return CustomResponse(new ApiResponseWithData<IEnumerable<SaleDto>>()
         {
-            var message = $"Error getting all sales.";
-            _logger.LogError(e, message);
-            return StatusCode(StatusCodes.Status500InternalServerError, message);
-        }
+            Success = result.Success,
+            Message = result.Message,
+            Data = result.Data
+        });
     }
 
     [HttpGet("{id:Guid}", Name = "GetById")]
     public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
-        try
-        {
-            var result = await _mediator.Send(new GetByIdSaleQuery(id));
-            if (result.Data == null)
-                return NotFound();
+        var result = await _mediator.Send(new GetByIdSaleQuery(id));
+        if (result.Data == null)
+            return NotFound();
 
-            return CustomResponse(new ApiResponseWithData<SaleDto>()
-            {
-                Success = result.Success,
-                Message = result.Message,
-                Data = result.Data
-            });
-        }
-        catch (Exception e)
+        return CustomResponse(new ApiResponseWithData<SaleDto>()
         {
-            var message = $"Error getting the sale id {id}.";
-            _logger.LogError(e, message);
-            return StatusCode(StatusCodes.Status500InternalServerError, message);
-        }
+            Success = result.Success,
+            Message = result.Message,
+            Data = result.Data
+        });
     }
 
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] SaleCreateCommand command)
     {
-        try
-        {
-            var result = await _mediator.Send(command);
+        var result = await _mediator.Send(command);
 
-            var response = new ApiResponseWithData<Guid>()
-            {
-                Success = result.Success,
-                Message = result.Message,
-                Data = result.Data
-            };
+        var response = new ApiResponseWithData<Guid>()
+        {
+            Success = result.Success,
+            Message = result.Message,
+            Data = result.Data
+        };
             
-            if (!result.Success)
-                return CustomResponse(response);
+        if (!result.Success)
+            return CustomResponse(response);
 
-            return Created(nameof(GetById), new { Id = result.Data }, response);
-        }
-        catch (Exception e)
-        {
-            var message = $"Error creating the sale number {command.Number}.";
-            _logger.LogError(e, message);
-            return StatusCode(StatusCodes.Status500InternalServerError, message);
-        }
+        return Created(nameof(GetById), new { Id = result.Data }, response);
     }
 
     [HttpPut("{id:Guid}")]
@@ -116,52 +89,34 @@ public class SalesController : BaseController
         if (command.Id != id)
             return BadRequest("The Id from in the request body does not match the Id from the route");
 
-        try
-        {
-            var exists = await _mediator.Send(new ExistsByIdSaleQuery(id));
-            if (!exists.Data)
-                return NotFound();
+        var exists = await _mediator.Send(new ExistsByIdSaleQuery(id));
+        if (!exists.Data)
+            return NotFound();
 
-            var result = await _mediator.Send(command);
+        var result = await _mediator.Send(command);
 
-            return CustomResponse(new ApiResponseWithData<Guid>()
-            {
-                Success = result.Success,
-                Message = result.Message,
-                Data = result.Data
-            });
-        }
-        catch (Exception e)
+        return CustomResponse(new ApiResponseWithData<Guid>()
         {
-            var message = $"Error updating the sale id {id}.";
-            _logger.LogError(e, message);
-            return StatusCode(StatusCodes.Status500InternalServerError, message);
-        }
+            Success = result.Success,
+            Message = result.Message,
+            Data = result.Data
+        });
     }
 
     [HttpDelete("{id:Guid}")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
-        try
-        {
-            var exists = await _mediator.Send(new ExistsByIdSaleQuery(id));
-            if(!exists.Data)
-                return NotFound();
+        var exists = await _mediator.Send(new ExistsByIdSaleQuery(id));
+        if(!exists.Data)
+            return NotFound();
 
-            var result = await _mediator.Send(new SaleDeleteCommand { Id = id });
+        var result = await _mediator.Send(new SaleDeleteCommand { Id = id });
 
-            return CustomResponse(new ApiResponseWithData<Guid>()
-            {
-                Success = result.Success,
-                Message = result.Message,
-                Data = result.Data
-            });
-        }
-        catch (Exception e)
+        return CustomResponse(new ApiResponseWithData<Guid>()
         {
-            var message = $"Error deleting the sale id {id}.";
-            _logger.LogError(e, message);
-            return StatusCode(StatusCodes.Status500InternalServerError, message);
-        }
+            Success = result.Success,
+            Message = result.Message,
+            Data = result.Data
+        });
     }
 }
