@@ -1,29 +1,21 @@
 ﻿using FluentValidation;
-using SalesApi.Domain.Entities;
 
-namespace SalesApi.Domain.Validation;
+namespace SalesApi.Application.UseCases.Sales.Commands.SaleUpdate;
 
-public class SaleValidator : AbstractValidator<Sale>
+public class SaleUpdateCommandValidator : AbstractValidator<SaleUpdateCommand>
 {
-    public SaleValidator()
+    public SaleUpdateCommandValidator()
     {
-        RuleFor(sale => sale.Id)
-            .NotEmpty();
-
+        RuleFor(x => x.Id).NotEmpty();
         RuleFor(sale => sale.Number)
             .NotEmpty()
             .GreaterThan(0);
-
         RuleFor(sale => sale.CustomerId).NotEmpty();
-
         RuleFor(sale => sale.BranchId).NotEmpty();
-
         RuleFor(sale => sale.Date).NotEmpty();
-
         RuleFor(sale => sale.Value)
             .NotEmpty()
             .GreaterThan(0);
-
         RuleFor(x => x.IsCanceled).NotEmpty();
     }
 }
