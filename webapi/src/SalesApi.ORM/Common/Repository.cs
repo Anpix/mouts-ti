@@ -31,6 +31,9 @@ namespace SalesApi.ORM.Common
 
         #endregion
 
+        public async Task<bool> ExistsById(Guid id) =>
+            await Context.Set<T>().AnyAsync(e => e.Id == id);
+
         public async Task<T> Add(T entity)
         {
             var entry = await Context.Set<T>().AddAsync(entity);

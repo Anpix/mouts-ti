@@ -4,6 +4,7 @@ using SalesApi.Application.UseCases.Sales.Commands.SaleCreate;
 using SalesApi.Application.UseCases.Sales.Commands.SaleDelete;
 using SalesApi.Application.UseCases.Sales.Commands.SaleUpdate;
 using SalesApi.Application.UseCases.Sales.Models;
+using SalesApi.Application.UseCases.Sales.Queries.ExistsById;
 using SalesApi.Application.UseCases.Sales.Queries.GetAll;
 using SalesApi.Application.UseCases.Sales.Queries.GetById;
 using SalesApi.ORM.Repositories;
@@ -64,6 +65,8 @@ public class SalesController : BaseController
         try
         {
             var result = await _mediator.Send(new GetByIdSaleQuery(id));
+            if (result.Data == null)
+                return NotFound();
 
             return CustomResponse(new ApiResponseWithData<SaleDto>()
             {
@@ -115,6 +118,10 @@ public class SalesController : BaseController
 
         try
         {
+            var exists = await _mediator.Send(new ExistsByIdSaleQuery(id));
+            if (!exists.Data)
+                return NotFound();
+
             var result = await _mediator.Send(command);
 
             return CustomResponse(new ApiResponseWithData<Guid>()
@@ -137,7 +144,12 @@ public class SalesController : BaseController
     {
         try
         {
+            var exists = await _mediator.Send(new ExistsByIdSaleQuery(id));
+            if(!exists.Data)
+                return NotFound();
+
             var result = await _mediator.Send(new SaleDeleteCommand { Id = id });
+
             return CustomResponse(new ApiResponseWithData<Guid>()
             {
                 Success = result.Success,

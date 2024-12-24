@@ -10,4 +10,5 @@ public interface IRepository<T> where T : BaseEntity
     Task Update(T entity);
     Task Delete(Guid id);
     int SaveChanges();
+    Task<bool> ExistsById(Guid id);
 }
